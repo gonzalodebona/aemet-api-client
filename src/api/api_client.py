@@ -1,4 +1,5 @@
 import requests
+import logging
 
 
 class AemetAPIClient:
@@ -10,8 +11,8 @@ class AemetAPIClient:
 
     Methods:
         - __init__(self, api_key: str = None)
-        - get_antartica_data(self, start_date: str, end_date: str, station_id: str) -> dict
-        - fetch_antartica_data(self, endpoint: str) -> dict
+        - get_antarctica_data(self, start_date: str, end_date: str, station_id: str) -> dict
+        - fetch_antarctica_data(self, endpoint: str) -> dict
     """
 
     def __init__(self, api_key: str = None):
@@ -23,9 +24,9 @@ class AemetAPIClient:
         """
         self.api_key = api_key
 
-    def get_antartica_data(self, start_date: str, end_date: str, station_id: str) -> dict:
+    def get_antarctica_data(self, start_date: str, end_date: str, station_id: str) -> dict:
         """
-        Fetch raw data from the AEMET API for a specific weather station in Antartica.
+        Fetch raw data from the AEMET API for a specific weather station in Antarctica.
 
         Args:
             start_date (str): Start date in the format 'AAAA-MM-DDTHH:MM:SSUTC'.
@@ -37,10 +38,12 @@ class AemetAPIClient:
         """
         try:
             # Create endpoint
-            endpoint = self.build_antartica_endpoint(start_date, end_date, station_id)
+            endpoint = self.build_antarctica_endpoint(start_date, end_date, station_id)
+            logging.info("Endpoint created: %s", endpoint)
 
             # Fetch raw data
-            raw_data = self.fetch_antartica_data(endpoint)
+            raw_data = self.fetch_antarctica_data(endpoint)
+            logging.info("Raw data downloaded")
             return raw_data
         except requests.RequestException as e:
             raise Exception(f"Error fetching data from API: {e}")
@@ -48,9 +51,9 @@ class AemetAPIClient:
             raise Exception(f"Error parsing API response: {ve}")
 
     @staticmethod
-    def build_antartica_endpoint(start_date: str, end_date: str, station_id: str) -> str:
+    def build_antarctica_endpoint(start_date: str, end_date: str, station_id: str) -> str:
         """
-        Build the complete API endpoint URL for Antartica weather data.
+        Build the complete API endpoint URL for Antarctica weather data.
 
         Args:
             start_date (str): Start date in the format 'YYYY-MM-DD'.
@@ -61,12 +64,12 @@ class AemetAPIClient:
             str: Complete API endpoint URL.
         """
         base_url = "https://opendata.aemet.es/opendata"
-        antartica_url = f"/api/antartida/datos/fechaini/{start_date}/fechafin/{end_date}/estacion/{station_id}"
-        return base_url + antartica_url
+        antarctica_url = f"/api/antartida/datos/fechaini/{start_date}/fechafin/{end_date}/estacion/{station_id}"
+        return base_url + antarctica_url
 
-    def fetch_antartica_data(self, endpoint: str) -> dict:
+    def fetch_antarctica_data(self, endpoint: str) -> dict:
         """
-        Fetch raw Antartica weather data from the specified API endpoint.
+        Fetch raw Antarctica weather data from the specified API endpoint.
 
         Args:
             endpoint (str): Complete API endpoint URL.
