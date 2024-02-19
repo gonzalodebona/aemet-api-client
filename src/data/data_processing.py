@@ -66,7 +66,7 @@ class DataProcessing:
                     agg_freq = 'D'
                     datetime_format = '%Y-%m-%d'
                 elif aggregation == 'Monthly':
-                    agg_freq = 'ME'
+                    agg_freq = 'M'
                     datetime_format = '%Y-%m'
 
                 aggregated_data = df_raw_data.resample(agg_freq).mean()
