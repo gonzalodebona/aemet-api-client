@@ -1,7 +1,7 @@
 import unittest
 from unittest.mock import Mock, patch
 
-from src.api.api_client import AemetAPIClient
+from aemet.api.api_client import AemetAPIClient
 
 
 class TestAemetAPIClient(unittest.TestCase):
@@ -18,7 +18,7 @@ class TestAemetAPIClient(unittest.TestCase):
         endpoint = self.client.build_antarctica_endpoint(start_date, end_date, station_id)
         self.assertEqual(endpoint, antarctica_endpoint)
 
-    @patch('src.api.api_client.requests.get')
+    @patch('aemet.api.api_client.requests.get')
     def test_fetch_antarctica_data(self, mock_get):
         # Import synthetic data for testing.
         from tests.utils import antarctica_endpoint, antarctica_json_data, antarctica_api_response, raw_antarctica_data

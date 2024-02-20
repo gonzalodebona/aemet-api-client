@@ -3,7 +3,7 @@ import pandas as pd
 import logging
 
 
-class DataProcessing:
+class DataProcessing(object):
     """
     A class for processing raw data from the Antarctica.
 

@@ -2,7 +2,7 @@ import requests
 import logging
 
 
-class AemetAPIClient:
+class AemetAPIClient(object):
     """
     A class for interacting with the AEMET API endpoint and fetching data.
 

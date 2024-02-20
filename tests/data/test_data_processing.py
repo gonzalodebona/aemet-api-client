@@ -3,7 +3,7 @@ import unittest
 import pandas as pd
 from pandas.testing import assert_frame_equal
 
-from src.data.data_processing import DataProcessing
+from aemet.data.data_processing import DataProcessing
 from tests.utils import raw_antarctica_data_processing
 
 

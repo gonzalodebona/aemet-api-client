@@ -12,21 +12,14 @@ In order to run this library you must have a validated API key from the AEMET an
 To install aemet-api-client, you can use git clone:
 
 ```
-git clone https://github.com/gonzalodebona/prueba.git
-```
-
-To install dependencies use:
-
-```
-pip install -r requirementst.txt
+pip install git+https://github.com/gonzalodebona/aemet-api-client.git
 ```
 
 ## Directory Structure
-    * src/: Contains the source code of the library.
+    * aemet/: Contains the source code of the library.
         * api/: Contains the API client class.
         * data/: Contains the data processing class.
-        * common.py: Contains common functions. 
-        * main.py: Entry point of the library.
+        * aemet_api.py: Entry point of the library.
     * test/: Contains unit tests for the library.
     * README.md: Documentation for the library.
     * requirements.txt: List of dependencies.
@@ -64,13 +57,20 @@ The output dataset will be a dataframe that will have the following structure:
 ## Execution
 
 ```
-python -m src <api_key> <start_date> <end_date> <station_id> <aggregation>
+from aemet.aemet_api import Aemet
+
+antarctica_data = Aemet().aemet_antarctica_data(api_key, start_date, end_date, station_id, aggregation)
 ```
 
 Example for Meteo Station Gabriel de Castilla:
 
 ```
-python -m src eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZWJvbmFnb256YWxvQGdtYWlsLmNvbSIsImp0aSI6IjUxMGNlMjEzLWYzYmUtNDY1MS1iZjlmLWZjNjMwMjVmNjRiMiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNzA3ODM2ODg5LCJ1c2VySWQiOiI1MTBjZTIxMy1mM2JlLTQ2NTEtYmY5Zi1mYzYzMDI1ZjY0YjIiLCJyb2xlIjoiIn0.0KUZveBVA9r72H8Xg-T4_0xMb5iJEaeLpXz0d6ecSnY 2010-02-14T13:30:02UTC 2010-03-14T18:45:00UTC 89070 Monthly
+api_key = "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJkZWJvbmFnb256YWxvQGdtYWlsLmNvbSIsImp0aSI6IjUxMGNlMjEzLWYzYmUtNDY1MS1iZjlmLWZjNjMwMjVmNjRiMiIsImlzcyI6IkFFTUVUIiwiaWF0IjoxNzA3ODM2ODg5LCJ1c2VySWQiOiI1MTBjZTIxMy1mM2JlLTQ2NTEtYmY5Zi1mYzYzMDI1ZjY0YjIiLCJyb2xlIjoiIn0.0KUZveBVA9r72H8Xg-T4_0xMb5iJEaeLpXz0d6ecSnY"
+start_date = '2010-02-14T13:30:02UTC'
+end_date = '2010-02-14T14:30:02UTC'
+station_id = '89070'
+aggregation = 'Monthly'
+antarctica_data = Aemet().aemet_antarctica_data(api_key, start_date, end_date, station_id, aggregation)
 ```
 
 ## Testing
